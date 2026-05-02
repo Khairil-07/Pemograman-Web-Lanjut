@@ -2,7 +2,7 @@
     <div class="container mx-auto flex justify-between items-center p-4">
     
     <div class="text-xl font-bold text-green-600">
-        donasiku
+        Donasiku
     </div>
 
     <nav class="space-x-6">

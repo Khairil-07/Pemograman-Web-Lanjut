@@ -10,7 +10,7 @@
             <h2 class="text-lg font-bold mb-2">Kontak Kami</h2>
             <ul class="text-sm text-gray-400">
                 <li>Email: info@donasiku.com</li>
-                <li>Telepon: (123) 456-7890</li>
+                <li>Telepon: (0561) 456-7890</li>
             </ul>
         </div>
     </div>

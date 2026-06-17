@@ -50,7 +50,7 @@
                         </div>
                         <div class="rounded-3xl border border-white/20 bg-white/10 p-6">
                             <p class="text-sm uppercase tracking-[0.24em] text-white/75">Fokus Program</p>
-                            <h3 class="mt-4 text-3xl font-bold">Pendidikan ;& Kesehatan</h3>
+                            <h3 class="mt-4 text-3xl font-bold">Pendidikan & Kesehatan</h3>
                             <p class="mt-3 text-sm leading-relaxed text-white/80">
                                 Mendukung keluarga prasejahtera lewat beasiswa, layanan kesehatan gratis, dan bantuan sembako.
                             </p>

@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('campaign_accounts', function (Blueprint $table) {
+        Schema::create('feeds', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('statusFeed');
+            $table->integer('likeFeed')->default(0);
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('campaign_accounts');
+        Schema::dropIfExists('feeds');
     }
 };

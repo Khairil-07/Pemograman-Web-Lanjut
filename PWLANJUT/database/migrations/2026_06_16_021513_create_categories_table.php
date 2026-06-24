@@ -11,12 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::create('categories', function (Blueprint $table) {
-        $table->id();
-        $table->string('name')->unique();
-        $table->string('slug')->unique();
-        $table->timestamps();
-    });
+        if (!Schema::hasTable('categories')) {
+            Schema::create('categories', function (Blueprint $table) {
+                $table->id();
+                $table->string('name')->unique();
+                $table->string('slug')->unique();
+                $table->timestamps();
+            });
+        } else {
+            Schema::table('categories', function (Blueprint $table) {
+                if (!Schema::hasColumn('categories', 'name')) {
+                    $table->string('name')->unique();
+                }
+                if (!Schema::hasColumn('categories', 'slug')) {
+                    $table->string('slug')->unique();
+                }
+            });
+        }
     }
 
     /**

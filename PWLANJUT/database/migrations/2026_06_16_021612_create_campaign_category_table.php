@@ -10,14 +10,25 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::create('campaign_category', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('campaign_id')->constrained()->onDelete('cascade');
-        $table->foreignId('category_id')->constrained()->onDelete('cascade');
-        $table->timestamps();
-    });
-}
+    {
+        if (!Schema::hasTable('campaign_category')) {
+            Schema::create('campaign_category', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('campaign_id')->constrained()->onDelete('cascade');
+                $table->foreignId('category_id')->constrained()->onDelete('cascade');
+                $table->timestamps();
+            });
+        } else {
+            Schema::table('campaign_category', function (Blueprint $table) {
+                if (!Schema::hasColumn('campaign_category', 'campaign_id')) {
+                    $table->foreignId('campaign_id')->constrained()->onDelete('cascade');
+                }
+                if (!Schema::hasColumn('campaign_category', 'category_id')) {
+                    $table->foreignId('category_id')->constrained()->onDelete('cascade');
+                }
+            });
+        }
+    }
 
     /**
      * Reverse the migrations.

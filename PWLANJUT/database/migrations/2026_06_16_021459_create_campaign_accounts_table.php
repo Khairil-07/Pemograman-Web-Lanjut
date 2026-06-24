@@ -10,13 +10,21 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-    Schema::create('campaign_accounts', function (Blueprint $table) {
-        $table->id();
-        // foreignId memastikan relasi One to One secara teknis di DB
-        $table->foreignId('campaign_id')->unique()->constrained()->onDelete('cascade');
-    });
+{
+    if (!Schema::hasTable('campaign_accounts')) {
+        Schema::create('campaign_accounts', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('campaign_id')->unique()->constrained()->onDelete('cascade');
+            $table->timestamps();
+        });
+    } else {
+        Schema::table('campaign_accounts', function (Blueprint $table) {
+            if (!Schema::hasColumn('campaign_accounts', 'campaign_id')) {
+                $table->foreignId('campaign_id')->unique()->constrained()->onDelete('cascade');
+            }
+        });
     }
+}
 
     /**
      * Reverse the migrations.

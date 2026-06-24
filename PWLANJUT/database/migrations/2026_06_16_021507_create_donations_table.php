@@ -11,14 +11,34 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::create('donations', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('campaign_id')->constrained()->onDelete('cascade');
-        $table->string('donor_name');
-        $table->decimal('amount', 12, 2);
-        $table->text('message')->nullable();
-        $table->timestamps();
-    });
+        if (!Schema::hasTable('donations')) {
+            Schema::create('donations', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('campaign_id')->constrained()->onDelete('cascade');
+                $table->string('donor_name');
+                $table->decimal('amount', 12, 2);
+                $table->text('message')->nullable();
+                $table->timestamps();
+            });
+        } else {
+            Schema::table('donations', function (Blueprint $table) {
+                if (!Schema::hasColumn('donations', 'campaign_id')) {
+                    $table->foreignId('campaign_id')->constrained()->onDelete('cascade');
+                }
+                if (!Schema::hasColumn('donations', 'donor_name')) {
+                    $table->string('donor_name');
+                }
+                if (!Schema::hasColumn('donations', 'amount')) {
+                    $table->decimal('amount', 12, 2);
+                }
+                if (!Schema::hasColumn('donations', 'message')) {
+                    $table->text('message')->nullable();
+                }
+                if (!Schema::hasColumn('donations', 'created_at')) {
+                    $table->timestamps();
+                }
+            });
+        }
     }
 
     /**
